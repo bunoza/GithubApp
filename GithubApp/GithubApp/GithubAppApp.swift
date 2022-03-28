@@ -11,7 +11,7 @@ import SwiftUI
 struct GithubAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Homescreen()
         }
     }
 }
