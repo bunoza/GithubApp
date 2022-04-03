@@ -10,6 +10,12 @@ import SwiftUI
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     
+    let delegate: HomeScreenDelegate
+    
+    init(delegate: HomeScreenDelegate) {
+        self.delegate = delegate
+    }
+    
     var body: some View {
         renderContentView()
     }
@@ -51,7 +57,7 @@ struct SheetView: View {
             isChecked: true,
             title: "Repositories"
         ) {
-            //viewModel.repositoriesChecked.toggle()
+            delegate.toggleRepositories()
         }
         .padding()
     }
@@ -61,7 +67,7 @@ struct SheetView: View {
             isChecked: false,
             title: "Users"
         ) {
-            //viewModel.usersChecked.toggle()
+            delegate.toggleUsers()
         }
         .padding()
     }

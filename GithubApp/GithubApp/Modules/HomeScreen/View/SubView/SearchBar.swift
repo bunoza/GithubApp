@@ -10,11 +10,11 @@ import SwiftUI
 struct SearchBar: View {
     
     @Binding var text: String
+    let geometry : GeometryProxy
     
     @State private var isEditing = false
     
     var body: some View {
-        GeometryReader { geometry in
             HStack {
                 TextField("Search ...", text: $text)
                     .padding(geometry.size.width/25)
@@ -27,7 +27,6 @@ struct SearchBar: View {
                         self.isEditing = true
                     }
             }
-        }
     }
     
     func renderSearchClearButton(geometry: GeometryProxy) -> some View {
