@@ -11,7 +11,8 @@ import SwiftUI
 struct GithubAppApp: App {
     var body: some Scene {
         WindowGroup {
-            Homescreen()
+            let viewModel = HomeScreenViewModel()
+            HomeScreen(viewModel: viewModel)
         }
     }
 }
