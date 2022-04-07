@@ -19,32 +19,30 @@ struct CollectionScreen: View {
         renderContentView()
             .navigationTitle("Results for \"\(viewModel.searchQuery)\"")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear() { viewModel.onAppear() }
     }
     
     func renderContentView() -> some View {
         ZStack {
-            if viewModel.isLoading {
-                LoaderView()
-            } else {
-                GeometryReader { geometry in
-                    renderListView(geometry: geometry)
+            if viewModel.repositoriesSelected && viewModel.usersSelected {
+                TabView {
+                    RepositoryListView(viewModel: viewModel)
+                        .tabItem {
+                            Image(systemName: "list.bullet.rectangle")
+                            Text("Repositories")
+                        }
+                    UserListView(viewModel: viewModel)
+                        .tabItem {
+                            Image(systemName: "person.circle")
+                            Text("Users")
+                        }
                 }
+
+            } else if viewModel.usersSelected {
+                UserListView(viewModel: viewModel)
+            } else {
+                RepositoryListView(viewModel: viewModel)
             }
         }
     }
-    func renderListView(geometry: GeometryProxy) -> some View {
-        List {
-            Section(
-                content: {
-                    ForEach(viewModel.repositories , id: \.self) { item in
-                        RepositoryCellView(repository: item, geometry: geometry)
-                    }
-                },
-                header: {
-                    Text("\(viewModel.repositories.count) RESULTS")
-                }
-            )
-        }
-    }
+    
 }

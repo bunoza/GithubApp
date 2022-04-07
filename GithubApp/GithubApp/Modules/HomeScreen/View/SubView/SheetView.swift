@@ -54,7 +54,7 @@ struct SheetView: View {
     
     func renderRepoCheckView() -> some View {
         CheckView(
-            isChecked: true,
+            isChecked: delegate.getRepositories(),
             title: "Repositories"
         ) {
             delegate.toggleRepositories()
@@ -64,7 +64,7 @@ struct SheetView: View {
     
     func renderUsersCheckView() -> some View {
         CheckView(
-            isChecked: false,
+            isChecked: delegate.getUsers(),
             title: "Users"
         ) {
             delegate.toggleUsers()

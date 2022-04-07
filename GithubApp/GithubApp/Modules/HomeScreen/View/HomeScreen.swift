@@ -76,7 +76,10 @@ struct HomeScreen: View, HomeScreenDelegate {
                 CollectionScreen(
                     viewModel: CollectionScreenViewModel(
                         usersSelected: viewModel.usersSelected,
-                        repositoriesSelected: viewModel.repositoriesSelected, githubRepository: GithubRepositoryImpl(), searchQuery: text
+                        repositoriesSelected: viewModel.repositoriesSelected,
+                        githubRepository: GithubRepositoryImpl(),
+                        userRepository: UsersRepositoryImpl(),
+                        searchQuery: text
                     )
                 )
             },
@@ -101,10 +104,20 @@ struct HomeScreen: View, HomeScreenDelegate {
     func toggleRepositories() {
         viewModel.didToggleRepositories()
     }
+    
+    func getUsers() -> Bool {
+        return viewModel.usersSelected
+    }
+    
+    func getRepositories() -> Bool {
+        return viewModel.repositoriesSelected
+    }
 }
 
 //MARK: - DELEGATE
 protocol HomeScreenDelegate {
     func toggleRepositories()
     func toggleUsers()
+    func getRepositories() -> Bool
+    func getUsers() -> Bool
 }

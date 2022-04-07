@@ -64,7 +64,7 @@ class ReceivedRepository: NSObject, Codable {
 //}
 
 // MARK: - Owner
-class Owner: Codable {
+class Owner: NSObject, Codable {
         let login: String
         let id: Int
     let nodeID: String
