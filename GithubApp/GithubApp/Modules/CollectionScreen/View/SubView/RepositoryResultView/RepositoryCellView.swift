@@ -9,18 +9,61 @@ import Foundation
 import SwiftUI
 
 struct RepositoryCellView: View {
-    
+    @State private var isBrowserPresented = false
     let repository: ReceivedRepository
     let geometry: GeometryProxy
+    let url: URL
     
     var body: some View {
-        HStack {
-            renderRepositoryInfo()
-                .padding(.vertical, 3)
-                .frame(width: geometry.size.width/2)
-            renderNumbersInfo()
-                .padding(.vertical, 2)
-                .frame(width: geometry.size.width/3.5)
+        createContent()
+            .background(
+                NavigationLink(
+                    isActive: $isBrowserPresented,
+                    destination: {
+                        Link(destination: url) {
+                            EmptyView()
+                        }
+                    },
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .hidden()
+            )
+    }
+    
+    func createContent() -> some View {
+        VStack {
+            HStack {
+                renderRepositoryInfo()
+                    .padding(.vertical, 3)
+                    .frame(width: geometry.size.width/2)
+                renderNumbersInfo()
+                    .padding(.vertical, 2)
+                    .frame(width: geometry.size.width/3.5)
+            }
+            .onTapGesture {
+                //open repository details
+            }
+            HStack {
+                Button(
+                    action: {
+                        //                        open author details
+                    },
+                    label: {
+                        Text("Author details")
+                    }
+                )
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+                
+                Button {
+                    isBrowserPresented.toggle()
+                } label: {
+                    Text("Open in Browser")
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
         }
     }
     

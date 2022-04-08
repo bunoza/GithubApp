@@ -29,7 +29,7 @@ struct UserListView: View {
             Section(
                 content: {
                     ForEach(viewModel.users , id: \.self) { item in
-                        UserCellView(user: item, geometry: geometry)
+                        UserCellView(user: item, geometry: geometry, url: URL(string: "https://github.com/bun")!)
                     }
                 },
                 header: {

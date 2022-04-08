@@ -12,16 +12,38 @@ struct UserCellView: View {
     
     let user: User
     let geometry: GeometryProxy
+    let url: URL
     
     var body: some View {
-        HStack {
-            renderUserName()
-                .padding(.vertical, 3)
-                .frame(width: geometry.size.width/2)
-            renderAvatar()
-                .padding(.vertical, 2)
-                .frame(width: geometry.size.width/4)
+        VStack {
+            HStack {
+                renderUserName()
+                    .padding(.vertical, 3)
+                    .frame(width: geometry.size.width/2)
+                renderAvatar()
+                    .padding(.vertical, 2)
+                    .frame(width: geometry.size.width/4)
+            }
+            HStack {
+                Button(
+                    action: {
+                        //                        open author details
+                    },
+                    label: {
+                        Text("Author details")
+                    }
+                )
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+                
+                HStack {
+                    NavigationLink(destination: { WebView(request: URLRequest(url: URL(string: user.htmlURL)!)) }, label: { Text("Open in browser") })
+                    
+                }
+            }
         }
+        
+        
     }
     
     func renderUserName() -> some View {

@@ -29,7 +29,15 @@ struct RepositoryListView: View {
             Section(
                 content: {
                     ForEach(viewModel.repositories , id: \.self) { item in
-                        RepositoryCellView(repository: item, geometry: geometry)
+                        if let url = item.htmlURL {
+                            if let repoLink = URL(string: url) {
+                                RepositoryCellView(repository: item, geometry: geometry, url: repoLink)
+                            } else {
+                                if let errorURL = Constants.errorUrlRepo {
+                                    RepositoryCellView(repository: item, geometry: geometry, url: errorURL)
+                                }
+                            }
+                        }
                     }
                 },
                 header: {
@@ -37,6 +45,7 @@ struct RepositoryListView: View {
                 }
             )
         }
+        .listStyle(InsetGroupedListStyle())
     }
     
 }

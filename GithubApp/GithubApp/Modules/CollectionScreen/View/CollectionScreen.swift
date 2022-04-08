@@ -10,6 +10,7 @@ import SwiftUI
 struct CollectionScreen: View {
     
     @ObservedObject var viewModel: CollectionScreenViewModel
+    @Environment(\.dismiss) var dismiss
     
     init(viewModel: CollectionScreenViewModel) {
         self.viewModel = viewModel
@@ -19,6 +20,18 @@ struct CollectionScreen: View {
         renderContentView()
             .navigationTitle("Results for \"\(viewModel.searchQuery)\"")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(
+                content: {
+                    ToolbarItem(placement: .navigationBarTrailing)
+                    {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                            .onTapGesture {
+                                dismiss()
+                            }
+                    }
+                }
+            )
     }
     
     func renderContentView() -> some View {
@@ -36,7 +49,7 @@ struct CollectionScreen: View {
                             Text("Users")
                         }
                 }
-
+                
             } else if viewModel.usersSelected {
                 UserListView(viewModel: viewModel)
             } else {

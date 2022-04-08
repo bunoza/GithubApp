@@ -30,7 +30,6 @@ class ReceivedRepository: NSObject, Codable {
     let stargazersCount, watchersCount: Int
     let forksCount, openIssuesCount: Int
     let visibility: String
-//    let license: License?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,24 +43,8 @@ class ReceivedRepository: NSObject, Codable {
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
         case visibility
-//        case license
     }
 }
-
-//// MARK: - License
-//class License: Codable {
-//    let key, name: String
-//    let url: String
-//    let spdxID, nodeID: String
-//    let htmlURL: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case key, name, url
-//        case spdxID = "spdx_id"
-//        case nodeID = "node_id"
-//        case htmlURL = "html_url"
-//    }
-//}
 
 // MARK: - Owner
 class Owner: NSObject, Codable {
