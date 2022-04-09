@@ -72,22 +72,10 @@ struct RepositoryCellView: View {
                 .padding()
                 
                 Button {
-                    isBrowserPresented.toggle()
+                    UIApplication.shared.open(url)
                 } label: {
                     Text("Open in Browser")
                 }
-                .background(
-                    NavigationLink(
-                        isActive: $isBrowserPresented,
-                        destination: {
-                            //MARK: open in browser
-                        },
-                        label: {
-                            EmptyView()
-                        }
-                    )
-                    .hidden()
-                )
                 .buttonStyle(PlainButtonStyle())
             }
         }

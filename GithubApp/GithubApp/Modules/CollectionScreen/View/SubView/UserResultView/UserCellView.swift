@@ -114,23 +114,10 @@ struct UserCellView: View {
     func renderOpenRepositoriesButton() -> some View {
         ZStack {
             Button {
-                isBrowserPresented.toggle()
+                UIApplication.shared.open(URL(string: user.htmlURL + "?tab=repositories")!)
             } label: {
                 Text("Open repositories")
             }
-            .background(
-                NavigationLink(
-                    isActive: $isBrowserPresented,
-                    destination: {
-                        //MARK: open in browser
-                        
-                    },
-                    label: {
-                        EmptyView()
-                    }
-                )
-                .hidden()
-            )
             .buttonStyle(PlainButtonStyle())
         }
     }
