@@ -14,10 +14,10 @@
 		C512FC2327FF360F00633BCA /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2227FF360F00633BCA /* UsersRepository.swift */; };
 		C512FC2527FF363100633BCA /* UsersRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2427FF363100633BCA /* UsersRepositoryImpl.swift */; };
 		C512FC2727FF36BF00633BCA /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2627FF36BF00633BCA /* UsersResponse.swift */; };
+		C5457D412801B505005A69FE /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5457D402801B505005A69FE /* WebView.swift */; };
 		C56F50B5280035FE00000FC6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F50B4280035FE00000FC6 /* Constants.swift */; };
 		C56F50B82800383D00000FC6 /* AuthorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F50B72800383D00000FC6 /* AuthorDetailsView.swift */; };
 		C56F50BE2800387B00000FC6 /* AuthorDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F50BD2800387B00000FC6 /* AuthorDetailsViewModel.swift */; };
-		C56F50C128003A9500000FC6 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56F50C028003A9500000FC6 /* WebView.swift */; };
 		C5B9776A27F88D8E00A3AF84 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776927F88D8E00A3AF84 /* HomeScreenViewModel.swift */; };
 		C5B9776E27F88E1500A3AF84 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776D27F88E1500A3AF84 /* RestManager.swift */; };
 		C5B9777027F88E3600A3AF84 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776F27F88E3600A3AF84 /* NetworkError.swift */; };
@@ -47,10 +47,10 @@
 		C512FC2227FF360F00633BCA /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
 		C512FC2427FF363100633BCA /* UsersRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepositoryImpl.swift; sourceTree = "<group>"; };
 		C512FC2627FF36BF00633BCA /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
+		C5457D402801B505005A69FE /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C56F50B4280035FE00000FC6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C56F50B72800383D00000FC6 /* AuthorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailsView.swift; sourceTree = "<group>"; };
 		C56F50BD2800387B00000FC6 /* AuthorDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailsViewModel.swift; sourceTree = "<group>"; };
-		C56F50C028003A9500000FC6 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C5B9776927F88D8E00A3AF84 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		C5B9776D27F88E1500A3AF84 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		C5B9776F27F88E3600A3AF84 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -170,14 +170,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		C56F50BF28003A8900000FC6 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				C56F50C028003A9500000FC6 /* WebView.swift */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
 		C5B9776727F8827800A3AF84 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +191,10 @@
 		C5B9776B27F88E0300A3AF84 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C56F50BF28003A8900000FC6 /* WebView */,
 				C5B9778927F8CCF900A3AF84 /* LoaderView */,
 				C5B9776C27F88E0A00A3AF84 /* Networking */,
 				C56F50B4280035FE00000FC6 /* Constants.swift */,
+				C5457D402801B505005A69FE /* WebView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -484,7 +476,7 @@
 				C5D3109027F24D4200B3A194 /* GithubAppApp.swift in Sources */,
 				C5B9776E27F88E1500A3AF84 /* RestManager.swift in Sources */,
 				C512FC2727FF36BF00633BCA /* UsersResponse.swift in Sources */,
-				C56F50C128003A9500000FC6 /* WebView.swift in Sources */,
+				C5457D412801B505005A69FE /* WebView.swift in Sources */,
 				C5D310A027F2615000B3A194 /* SheetView.swift in Sources */,
 				C5B9777827F8960F00A3AF84 /* CollectionScreen.swift in Sources */,
 				C5B9778227F8A5B500A3AF84 /* GithubRepositoryResponse.swift in Sources */,

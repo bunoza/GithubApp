@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct RepositoryCellView: View {
+    @State private var isRepositoryPresented = false
+    @State private var isAuthorPresented = false
     @State private var isBrowserPresented = false
     let repository: ReceivedRepository
     let geometry: GeometryProxy
@@ -16,20 +18,6 @@ struct RepositoryCellView: View {
     
     var body: some View {
         createContent()
-            .background(
-                NavigationLink(
-                    isActive: $isBrowserPresented,
-                    destination: {
-                        Link(destination: url) {
-                            EmptyView()
-                        }
-                    },
-                    label: {
-                        EmptyView()
-                    }
-                )
-                .hidden()
-            )
     }
     
     func createContent() -> some View {
@@ -43,16 +31,42 @@ struct RepositoryCellView: View {
                     .frame(width: geometry.size.width/3.5)
             }
             .onTapGesture {
-                //open repository details
+                isRepositoryPresented.toggle()
             }
+            .background(
+                NavigationLink(
+                    isActive: $isRepositoryPresented,
+                    destination: {
+                        WebView(request: URLRequest(url: url))
+                            .navigationTitle(repository.name)
+                    },
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .hidden()
+            )
             HStack {
                 Button(
                     action: {
-                        //                        open author details
+                        isAuthorPresented.toggle()
                     },
                     label: {
                         Text("Author details")
                     }
+                )
+                .background(
+                    NavigationLink(
+                        isActive: $isAuthorPresented,
+                        destination: {
+                            WebView(request: URLRequest(url: URL(string: repository.owner.htmlURL)!))
+                                .navigationTitle(repository.owner.login)
+                        },
+                        label: {
+                            EmptyView()
+                        }
+                    )
+                    .hidden()
                 )
                 .buttonStyle(PlainButtonStyle())
                 .padding()
@@ -62,6 +76,18 @@ struct RepositoryCellView: View {
                 } label: {
                     Text("Open in Browser")
                 }
+                .background(
+                    NavigationLink(
+                        isActive: $isBrowserPresented,
+                        destination: {
+                            //MARK: open in browser
+                        },
+                        label: {
+                            EmptyView()
+                        }
+                    )
+                    .hidden()
+                )
                 .buttonStyle(PlainButtonStyle())
             }
         }

@@ -9,12 +9,18 @@ import Foundation
 import SwiftUI
 
 struct UserCellView: View {
-    
+    @State private var isDetailsPresentedFromCard = false
+    @State private var isDetailsPresentedFromButton = false
+    @State private var isBrowserPresented = false
     let user: User
     let geometry: GeometryProxy
     let url: URL
     
     var body: some View {
+        createContent()
+    }
+    
+    func createContent() -> some View {
         VStack {
             HStack {
                 renderUserName()
@@ -22,29 +28,32 @@ struct UserCellView: View {
                     .frame(width: geometry.size.width/2)
                 renderAvatar()
                     .padding(.vertical, 2)
-                    .frame(width: geometry.size.width/4)
+                    .frame(width: geometry.size.width/3.5)
             }
-            HStack {
-                Button(
-                    action: {
-                        //                        open author details
+            .onTapGesture {
+                isDetailsPresentedFromCard.toggle()
+            }
+            .background(
+                NavigationLink(
+                    isActive: $isDetailsPresentedFromCard,
+                    destination: {
+                        WebView(request: URLRequest(url: url))
+                        .navigationTitle(user.login)
                     },
                     label: {
-                        Text("Author details")
+                        EmptyView()
                     }
                 )
-                .buttonStyle(PlainButtonStyle())
-                .padding()
-                
-                HStack {
-                    NavigationLink(destination: { WebView(request: URLRequest(url: URL(string: user.htmlURL)!)) }, label: { Text("Open in browser") })
-                    
-                }
+                .hidden()
+            )
+            HStack {
+                Spacer()
+                renderOpenProfileButton()
+                renderOpenRepositoriesButton()
             }
         }
-        
-        
     }
+    
     
     func renderUserName() -> some View {
         HStack {
@@ -70,6 +79,59 @@ struct UserCellView: View {
                     ProgressView()
                 }
             )
+        }
+    }
+    
+    func renderOpenProfileButton() -> some View {
+        ZStack {
+            Button(
+                action: {
+                    isDetailsPresentedFromButton.toggle()
+                    print(url)
+                },
+                label: {
+                    Text("Open profile")
+                }
+            )
+            .background(
+                NavigationLink(
+                    isActive: $isDetailsPresentedFromButton,
+                    destination: {
+                        WebView(request: URLRequest(url: url))
+                        .navigationTitle(user.login)
+                    },
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .hidden()
+            )
+            .buttonStyle(PlainButtonStyle())
+            .padding()
+        }
+    }
+    
+    func renderOpenRepositoriesButton() -> some View {
+        ZStack {
+            Button {
+                isBrowserPresented.toggle()
+            } label: {
+                Text("Open repositories")
+            }
+            .background(
+                NavigationLink(
+                    isActive: $isBrowserPresented,
+                    destination: {
+                        //MARK: open in browser
+                        
+                    },
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .hidden()
+            )
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }
