@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 
 struct RepositoryCellView: View {
+    
     @State private var isRepositoryPresented = false
     @State private var isAuthorPresented = false
     @State private var isBrowserPresented = false
+    
     let repository: ReceivedRepository
     let geometry: GeometryProxy
     let url: URL
@@ -59,8 +61,10 @@ struct RepositoryCellView: View {
                     NavigationLink(
                         isActive: $isAuthorPresented,
                         destination: {
-                            WebView(request: URLRequest(url: URL(string: repository.owner.htmlURL)!))
-                                .navigationTitle(repository.owner.login)
+                            if let validURL = URL(string: repository.owner.htmlURL) {
+                                WebView(request: URLRequest(url: validURL))
+                                    .navigationTitle(repository.owner.login)
+                            }
                         },
                         label: {
                             EmptyView()
@@ -85,16 +89,14 @@ struct RepositoryCellView: View {
         VStack {
             renderRepositoryName()
             renderAuthor()
-            if let desc = repository.itemDescription {
-                renderDescription(description: desc)
-            }
+            renderDescription()
         }
     }
     
     func renderRepositoryName() -> some View {
         HStack {
             Text(repository.name)
-                .font(.title)
+                .font(.system(size: geometry.size.height/35))
                 .foregroundColor(.gray)
                 .lineLimit(1)
             Spacer()
@@ -106,16 +108,22 @@ struct RepositoryCellView: View {
             Text(repository.owner.login)
                 .font(.footnote)
                 .foregroundColor(.gray)
-                .padding(.vertical, 3)
             Spacer()
         }
+        .padding(.vertical, 3)
     }
     
-    func renderDescription(description: String) -> some View {
+    func renderDescription() -> some View {
         HStack {
-            Text(description)
-                .font(.subheadline)
-                .lineLimit(2)
+            if let validDescription = repository.itemDescription {
+                Text(validDescription)
+                    .font(.subheadline)
+                    .lineLimit(2)
+            } else {
+                Text("No description available.")
+                    .font(.subheadline).italic()
+                    .lineLimit(2)
+            }
             Spacer()
         }
     }

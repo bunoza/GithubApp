@@ -15,18 +15,18 @@ struct SearchBar: View {
     @State private var isEditing = false
     
     var body: some View {
-            HStack {
-                TextField("Search ...", text: $text)
-                    .padding(geometry.size.width/25)
-                    .padding(.trailing, geometry.size.width/10)
-                    .background(Color(.systemGray6))
-                    .overlay(
-                        renderSearchClearButton(geometry: geometry)
-                    )
-                    .onTapGesture {
-                        self.isEditing = true
-                    }
-            }
+        HStack {
+            TextField("Search ...", text: $text)
+                .padding(geometry.size.width/25)
+                .padding(.trailing, geometry.size.width/10)
+                .background(Color(.systemGray6))
+                .overlay(
+                    renderSearchClearButton(geometry: geometry)
+                )
+                .onTapGesture {
+                    self.isEditing = true
+                }
+        }
     }
     
     func renderSearchClearButton(geometry: GeometryProxy) -> some View {

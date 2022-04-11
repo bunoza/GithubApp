@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View, HomeScreenDelegate {
     
-    @ObservedObject var viewModel: HomeScreenViewModel
-    
+    @ObservedObject private var viewModel: HomeScreenViewModel
     @State private var showingSheet = false
     @State var text: String = ""
     
@@ -37,9 +36,12 @@ struct HomeScreen: View, HomeScreenDelegate {
     func renderContentView() -> some View {
         GeometryReader { geometry in
             VStack {
+                Spacer()
                 renderLogoImage(geometry: geometry)
                 renderSearchBar(geometry: geometry)
                 renderSearchButton(geometry: geometry)
+                Spacer()
+                Spacer()
             }
         }
     }
@@ -61,7 +63,8 @@ struct HomeScreen: View, HomeScreenDelegate {
         Image("github-icon")
             .resizable()
             .scaledToFit()
-            .padding(geometry.size.height/7)
+            .frame(width: geometry.size.width/4, height: geometry.size.height/4)
+            .padding()
     }
     
     func renderSearchBar(geometry: GeometryProxy) -> some View {
@@ -90,6 +93,7 @@ struct HomeScreen: View, HomeScreenDelegate {
                     .overlay(content: {
                         Text("SEARCH")
                             .foregroundColor(Color.white)
+                            .font(.system(size: geometry.size.height/40))
                             .padding(.horizontal)
                     })
             }
@@ -116,8 +120,8 @@ struct HomeScreen: View, HomeScreenDelegate {
 
 //MARK: - DELEGATE
 protocol HomeScreenDelegate {
-    func toggleRepositories()
     func toggleUsers()
-    func getRepositories() -> Bool
+    func toggleRepositories()
     func getUsers() -> Bool
+    func getRepositories() -> Bool
 }

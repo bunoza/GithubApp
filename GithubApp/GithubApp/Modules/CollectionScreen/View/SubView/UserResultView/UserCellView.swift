@@ -38,7 +38,7 @@ struct UserCellView: View {
                     isActive: $isDetailsPresentedFromCard,
                     destination: {
                         WebView(request: URLRequest(url: url))
-                        .navigationTitle(user.login)
+                            .navigationTitle(user.login)
                     },
                     label: {
                         EmptyView()
@@ -98,7 +98,7 @@ struct UserCellView: View {
                     isActive: $isDetailsPresentedFromButton,
                     destination: {
                         WebView(request: URLRequest(url: url))
-                        .navigationTitle(user.login)
+                            .navigationTitle(user.login)
                     },
                     label: {
                         EmptyView()
@@ -114,7 +114,9 @@ struct UserCellView: View {
     func renderOpenRepositoriesButton() -> some View {
         ZStack {
             Button {
-                UIApplication.shared.open(URL(string: user.htmlURL + "?tab=repositories")!)
+                if let validURL = URL(string: user.htmlURL + "?tab=repositories") {
+                    UIApplication.shared.open(validURL)
+                }
             } label: {
                 Text("Open repositories")
             }
