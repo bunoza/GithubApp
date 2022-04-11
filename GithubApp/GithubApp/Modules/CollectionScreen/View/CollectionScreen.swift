@@ -17,21 +17,26 @@ struct CollectionScreen: View {
     }
     
     var body: some View {
-        renderContentView()
-            .navigationTitle("Results for \"\(viewModel.searchQuery)\"")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar(
-                content: {
-                    ToolbarItem(placement: .navigationBarTrailing)
-                    {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
-                            .onTapGesture {
-                                dismiss()
-                            }
+        if let error = viewModel.error {
+            ErrorView(error: error)
+        } else {
+            renderContentView()
+                .navigationTitle("Results for \"\(viewModel.searchQuery)\"")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar(
+                    content: {
+                        ToolbarItem(placement: .navigationBarTrailing)
+                        {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                                .onTapGesture {
+                                    dismiss()
+                                }
+                        }
                     }
-                }
-            )
+                )
+        }
+        
     }
     
     func renderContentView() -> some View {
