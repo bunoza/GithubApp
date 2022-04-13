@@ -10,6 +10,6 @@ import Combine
 
 class UsersRepositoryImpl: UsersRepository {
     func fetch(query: String) -> AnyPublisher<Result<UsersResponse,NetworkError>,Never> {
-        return RestManager.fetch(url: "https://api.github.com/search/users?q=\(query)")
+        return RestManager.fetch(url: RestEndpoints.user(query: query).endpoint())
     }
 }

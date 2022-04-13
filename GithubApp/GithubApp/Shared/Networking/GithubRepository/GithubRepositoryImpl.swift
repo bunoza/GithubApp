@@ -10,6 +10,6 @@ import Combine
 
 class GithubRepositoryImpl: GithubRepository {
     func fetch(query: String) -> AnyPublisher<Result<GithubRepositoryResponse,NetworkError>,Never> {
-        return RestManager.fetch(url: "https://api.github.com/search/repositories?q=\(query)")
+        return RestManager.fetch(url: RestEndpoints.repository(query: query).endpoint())
     }
 }

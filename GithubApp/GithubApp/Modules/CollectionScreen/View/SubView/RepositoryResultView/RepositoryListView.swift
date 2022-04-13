@@ -21,7 +21,8 @@ struct RepositoryListView: View {
                     renderListView(geometry: geometry)
                 }
             }
-        }.onAppear() { viewModel.onRepositoriesAppear() }
+        }
+        .onAppear() { viewModel.onRepositoriesAppear() }
     }
     
     func renderListView(geometry: GeometryProxy) -> some View {
@@ -33,8 +34,8 @@ struct RepositoryListView: View {
                             if let repoLink = URL(string: url) {
                                 RepositoryCellView(repository: item, geometry: geometry, url: repoLink)
                             } else {
-                                if let errorURL = Constants.errorUrlRepo {
-                                    RepositoryCellView(repository: item, geometry: geometry, url: errorURL)
+                                if let validURL = URL(string: RestEndpoints.error.endpoint()) {
+                                    RepositoryCellView(repository: item, geometry: geometry, url: validURL)
                                 }
                             }
                         }

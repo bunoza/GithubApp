@@ -114,7 +114,7 @@ struct UserCellView: View {
     func renderOpenRepositoriesButton() -> some View {
         ZStack {
             Button {
-                if let validURL = URL(string: user.htmlURL + "?tab=repositories") {
+                if let validURL = URL(string: user.htmlURL + RestEndpoints.usersRepositoriesAddon) {
                     UIApplication.shared.open(validURL)
                 }
             } label: {
