@@ -58,6 +58,9 @@ struct SheetView: View {
             title: "Repositories"
         ) {
             delegate.toggleRepositories()
+            if delegate.getUsers() == false && delegate.getRepositories() == false {
+                delegate.toggleRepositories()
+            }
         }
         .padding()
     }
@@ -68,6 +71,9 @@ struct SheetView: View {
             title: "Users"
         ) {
             delegate.toggleUsers()
+            if delegate.getUsers() == false && delegate.getRepositories() == false {
+                delegate.toggleRepositories()
+            }
         }
         .padding()
     }
