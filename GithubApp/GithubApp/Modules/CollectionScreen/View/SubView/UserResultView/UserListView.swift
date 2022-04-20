@@ -10,7 +10,7 @@ import SwiftUI
 
 struct UserListView: View {
     
-    @ObservedObject var viewModel: CollectionScreenViewModel
+    @ObservedObject var viewModel: SearchResultsViewModel
     
     var body: some View {
         ZStack {
@@ -26,16 +26,13 @@ struct UserListView: View {
     
     func renderListView(geometry: GeometryProxy) -> some View {
         List {
-            Section(
-                content: {
-                    ForEach(viewModel.users , id: \.self) { item in
+            ForEach(viewModel.users , id: \.self) { item in
+                Section(
+                    content: {
                         UserCellView(user: item, geometry: geometry, url: URL(string: item.htmlURL)!)
                     }
-                },
-                header: {
-                    Text("\(viewModel.users.count) RESULTS")
-                }
-            )
+                )
+            }
         }
     }
     

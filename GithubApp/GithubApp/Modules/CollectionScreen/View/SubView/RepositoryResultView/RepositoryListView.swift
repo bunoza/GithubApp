@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RepositoryListView: View {
     
-    @ObservedObject var viewModel: CollectionScreenViewModel
+    @ObservedObject var viewModel: SearchResultsViewModel
     
     var body: some View {
         ZStack {
@@ -27,9 +27,9 @@ struct RepositoryListView: View {
     
     func renderListView(geometry: GeometryProxy) -> some View {
         List {
-            Section(
-                content: {
-                    ForEach(viewModel.repositories , id: \.self) { item in
+            ForEach(viewModel.repositories , id: \.self) { item in
+                Section(
+                    content: {
                         if let url = item.htmlURL {
                             if let repoLink = URL(string: url) {
                                 RepositoryCellView(repository: item, geometry: geometry, url: repoLink)
@@ -40,11 +40,8 @@ struct RepositoryListView: View {
                             }
                         }
                     }
-                },
-                header: {
-                    Text("\(viewModel.repositories.count) RESULTS")
-                }
-            )
+                )
+            }
         }
         .listStyle(InsetGroupedListStyle())
     }
