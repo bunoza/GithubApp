@@ -14,14 +14,20 @@
 		C512FC2327FF360F00633BCA /* UsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2227FF360F00633BCA /* UsersRepository.swift */; };
 		C512FC2527FF363100633BCA /* UsersRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2427FF363100633BCA /* UsersRepositoryImpl.swift */; };
 		C512FC2727FF36BF00633BCA /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C512FC2627FF36BF00633BCA /* UsersResponse.swift */; };
+		C52B635C28106EAF00E8F223 /* SearchButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B635B28106EAF00E8F223 /* SearchButtonStyle.swift */; };
+		C52B63612810879A00E8F223 /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B63602810879A00E8F223 /* SheetViewModel.swift */; };
+		C52B6364281089EE00E8F223 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B6363281089EE00E8F223 /* UserDefaultsManager.swift */; };
+		C52B636728108A3300E8F223 /* GithubAppSaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B636628108A3300E8F223 /* GithubAppSaveModel.swift */; };
+		C52B636A28108B2200E8F223 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B636928108B2200E8F223 /* UserDefaults+Extensions.swift */; };
+		C52B636D2810910200E8F223 /* GithubAppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52B636C2810910200E8F223 /* GithubAppError.swift */; };
 		C5457D412801B505005A69FE /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5457D402801B505005A69FE /* WebView.swift */; };
 		C5A7638F2804566A00805D16 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A7638E2804566A00805D16 /* ErrorView.swift */; };
 		C5B9776A27F88D8E00A3AF84 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776927F88D8E00A3AF84 /* HomeScreenViewModel.swift */; };
 		C5B9776E27F88E1500A3AF84 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776D27F88E1500A3AF84 /* RestManager.swift */; };
 		C5B9777027F88E3600A3AF84 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9776F27F88E3600A3AF84 /* NetworkError.swift */; };
 		C5B9777227F88E5600A3AF84 /* SerializationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777127F88E5600A3AF84 /* SerializationManager.swift */; };
-		C5B9777827F8960F00A3AF84 /* CollectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777727F8960F00A3AF84 /* CollectionScreen.swift */; };
-		C5B9777A27F8966100A3AF84 /* CollectionScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777927F8966100A3AF84 /* CollectionScreenViewModel.swift */; };
+		C5B9777827F8960F00A3AF84 /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777727F8960F00A3AF84 /* SearchResultsView.swift */; };
+		C5B9777A27F8966100A3AF84 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777927F8966100A3AF84 /* SearchResultsViewModel.swift */; };
 		C5B9777D27F8A38900A3AF84 /* GithubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777C27F8A38900A3AF84 /* GithubRepository.swift */; };
 		C5B9778027F8A53F00A3AF84 /* GithubRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9777F27F8A53F00A3AF84 /* GithubRepositoryImpl.swift */; };
 		C5B9778227F8A5B500A3AF84 /* GithubRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B9778127F8A5B500A3AF84 /* GithubRepositoryResponse.swift */; };
@@ -46,14 +52,20 @@
 		C512FC2227FF360F00633BCA /* UsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepository.swift; sourceTree = "<group>"; };
 		C512FC2427FF363100633BCA /* UsersRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersRepositoryImpl.swift; sourceTree = "<group>"; };
 		C512FC2627FF36BF00633BCA /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
+		C52B635B28106EAF00E8F223 /* SearchButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonStyle.swift; sourceTree = "<group>"; };
+		C52B63602810879A00E8F223 /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
+		C52B6363281089EE00E8F223 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		C52B636628108A3300E8F223 /* GithubAppSaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAppSaveModel.swift; sourceTree = "<group>"; };
+		C52B636928108B2200E8F223 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		C52B636C2810910200E8F223 /* GithubAppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAppError.swift; sourceTree = "<group>"; };
 		C5457D402801B505005A69FE /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C5A7638E2804566A00805D16 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		C5B9776927F88D8E00A3AF84 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		C5B9776D27F88E1500A3AF84 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		C5B9776F27F88E3600A3AF84 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C5B9777127F88E5600A3AF84 /* SerializationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializationManager.swift; sourceTree = "<group>"; };
-		C5B9777727F8960F00A3AF84 /* CollectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionScreen.swift; sourceTree = "<group>"; };
-		C5B9777927F8966100A3AF84 /* CollectionScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionScreenViewModel.swift; sourceTree = "<group>"; };
+		C5B9777727F8960F00A3AF84 /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		C5B9777927F8966100A3AF84 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		C5B9777C27F8A38900A3AF84 /* GithubRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepository.swift; sourceTree = "<group>"; };
 		C5B9777F27F8A53F00A3AF84 /* GithubRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryImpl.swift; sourceTree = "<group>"; };
 		C5B9778127F8A5B500A3AF84 /* GithubRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryResponse.swift; sourceTree = "<group>"; };
@@ -108,6 +120,65 @@
 				C512FC2427FF363100633BCA /* UsersRepositoryImpl.swift */,
 			);
 			path = UsersRepository;
+			sourceTree = "<group>";
+		};
+		C52B635A28106E9300E8F223 /* CustomStyle */ = {
+			isa = PBXGroup;
+			children = (
+				C52B635B28106EAF00E8F223 /* SearchButtonStyle.swift */,
+			);
+			path = CustomStyle;
+			sourceTree = "<group>";
+		};
+		C52B635D2810873800E8F223 /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				C52B635F2810878100E8F223 /* ViewModel */,
+				C52B635E2810877200E8F223 /* View */,
+			);
+			path = SettingsModule;
+			sourceTree = "<group>";
+		};
+		C52B635E2810877200E8F223 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3109F27F2615000B3A194 /* SheetView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C52B635F2810878100E8F223 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C52B63602810879A00E8F223 /* SheetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C52B6362281089D500E8F223 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				C52B636528108A2700E8F223 /* Model */,
+				C52B6363281089EE00E8F223 /* UserDefaultsManager.swift */,
+				C52B636C2810910200E8F223 /* GithubAppError.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		C52B636528108A2700E8F223 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C52B636628108A3300E8F223 /* GithubAppSaveModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C52B636828108B1A00E8F223 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C52B636928108B2200E8F223 /* UserDefaults+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C56F50B228001EF200000FC6 /* RepositoryResultView */ = {
@@ -165,6 +236,9 @@
 		C5B9776B27F88E0300A3AF84 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C52B636828108B1A00E8F223 /* Extensions */,
+				C52B6362281089D500E8F223 /* Persistence */,
+				C52B635A28106E9300E8F223 /* CustomStyle */,
 				C5A7638D2804566100805D16 /* ErrorView */,
 				C5A7638C2804553000805D16 /* WebView */,
 				C5B9778927F8CCF900A3AF84 /* LoaderView */,
@@ -218,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				C5B9778627F8B77C00A3AF84 /* SubView */,
-				C5B9777727F8960F00A3AF84 /* CollectionScreen.swift */,
+				C5B9777727F8960F00A3AF84 /* SearchResultsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,7 +300,7 @@
 		C5B9778427F8B76000A3AF84 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C5B9777927F8966100A3AF84 /* CollectionScreenViewModel.swift */,
+				C5B9777927F8966100A3AF84 /* SearchResultsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -297,6 +371,7 @@
 		C5D310A327F2684C00B3A194 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				C52B635D2810873800E8F223 /* SettingsModule */,
 				C5B9776827F88D7D00A3AF84 /* ViewModel */,
 				C5D310A427F2685300B3A194 /* View */,
 			);
@@ -316,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				C5D3109D27F24FE300B3A194 /* SearchBar.swift */,
-				C5D3109F27F2615000B3A194 /* SheetView.swift */,
 				C5D310A127F262CF00B3A194 /* CheckView.swift */,
 			);
 			path = SubView;
@@ -437,13 +511,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5A7638F2804566A00805D16 /* ErrorView.swift in Sources */,
+				C52B636728108A3300E8F223 /* GithubAppSaveModel.swift in Sources */,
 				C5B9777D27F8A38900A3AF84 /* GithubRepository.swift in Sources */,
-				C5B9777A27F8966100A3AF84 /* CollectionScreenViewModel.swift in Sources */,
+				C52B635C28106EAF00E8F223 /* SearchButtonStyle.swift in Sources */,
+				C52B63612810879A00E8F223 /* SheetViewModel.swift in Sources */,
+				C5B9777A27F8966100A3AF84 /* SearchResultsViewModel.swift in Sources */,
 				C512FC2027FF350200633BCA /* UserListView.swift in Sources */,
 				C5D3109227F24D4200B3A194 /* HomeScreen.swift in Sources */,
 				C5B9778827F8B79400A3AF84 /* RepositoryCellView.swift in Sources */,
 				C5B9777227F88E5600A3AF84 /* SerializationManager.swift in Sources */,
 				C5B9777027F88E3600A3AF84 /* NetworkError.swift in Sources */,
+				C52B636D2810910200E8F223 /* GithubAppError.swift in Sources */,
+				C52B6364281089EE00E8F223 /* UserDefaultsManager.swift in Sources */,
 				C5B9776A27F88D8E00A3AF84 /* HomeScreenViewModel.swift in Sources */,
 				C512FC1E27FF33C100633BCA /* UserCellView.swift in Sources */,
 				C5D3109027F24D4200B3A194 /* GithubAppApp.swift in Sources */,
@@ -452,12 +531,13 @@
 				C5457D412801B505005A69FE /* WebView.swift in Sources */,
 				C5D310A027F2615000B3A194 /* SheetView.swift in Sources */,
 				C5DCDD152806D2C20089C381 /* RestEndPoints.swift in Sources */,
-				C5B9777827F8960F00A3AF84 /* CollectionScreen.swift in Sources */,
+				C5B9777827F8960F00A3AF84 /* SearchResultsView.swift in Sources */,
 				C5B9778227F8A5B500A3AF84 /* GithubRepositoryResponse.swift in Sources */,
 				C5B9778027F8A53F00A3AF84 /* GithubRepositoryImpl.swift in Sources */,
 				C5B9778B27F8CD1000A3AF84 /* LoaderView.swift in Sources */,
 				C5D3109E27F24FE300B3A194 /* SearchBar.swift in Sources */,
 				C512FC2527FF363100633BCA /* UsersRepositoryImpl.swift in Sources */,
+				C52B636A28108B2200E8F223 /* UserDefaults+Extensions.swift in Sources */,
 				C512FC1B27FF323000633BCA /* RepositoryListView.swift in Sources */,
 				C512FC2327FF360F00633BCA /* UsersRepository.swift in Sources */,
 				C5D310A227F262CF00B3A194 /* CheckView.swift in Sources */,

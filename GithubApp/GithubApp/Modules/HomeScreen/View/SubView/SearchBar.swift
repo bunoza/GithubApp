@@ -10,18 +10,17 @@ import SwiftUI
 struct SearchBar: View {
     
     @Binding var text: String
-    let geometry : GeometryProxy
     
     @State private var isEditing = false
     
     var body: some View {
         HStack {
             TextField("Search ...", text: $text)
-                .padding(geometry.size.width/25)
-                .padding(.trailing, geometry.size.width/10)
+                .padding()
+                .padding(.trailing)
                 .background(Color(.systemGray6))
                 .overlay(
-                    renderSearchClearButton(geometry: geometry)
+                    renderSearchClearButton()
                 )
                 .onTapGesture {
                     self.isEditing = true
@@ -29,7 +28,7 @@ struct SearchBar: View {
         }
     }
     
-    func renderSearchClearButton(geometry: GeometryProxy) -> some View {
+    func renderSearchClearButton() -> some View {
         HStack {
             if isEditing {
                 Spacer()
@@ -40,14 +39,14 @@ struct SearchBar: View {
                     label: {
                         Image(systemName: "multiply.circle.fill")
                             .foregroundColor(.gray)
-                            .padding(.trailing, geometry.size.width/25)
+                            .padding(.trailing)
                     }
                 )
             } else {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, geometry.size.width/25)
+                    .padding(.trailing)
             }
         }
     }

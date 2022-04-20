@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct HomeScreen: View, HomeScreenDelegate {
+struct HomeScreen: View {
     
     @ObservedObject private var viewModel: HomeScreenViewModel
-    @State private var showingSheet = false
-    @State var text: String = ""
     
     init(viewModel: HomeScreenViewModel) {
         self.viewModel = viewModel
@@ -27,20 +25,30 @@ struct HomeScreen: View, HomeScreenDelegate {
                         renderFilterButton()
                     }
                 })
-        }
-        .sheet(isPresented: $showingSheet) {
-            SheetView(delegate: self)
+                .sheet(isPresented: $viewModel.showingSheet) {
+                    NavigationView {
+                        SheetView(viewModel: SheetViewModel(delegate: viewModel))
+                    }
+                }
         }
     }
     
     func renderContentView() -> some View {
         GeometryReader { geometry in
-            VStack {
+            HStack {
                 Spacer()
-                renderLogoImage(geometry: geometry)
-                renderSearchBar(geometry: geometry)
-                renderSearchButton(geometry: geometry)
-                Spacer()
+                
+                VStack {
+                    Spacer()
+                    renderLogoImage()
+                    Spacer()
+                    renderSearchBar()
+                    Spacer()
+                    renderSearchButton()
+                    Spacer()
+                }
+                .frame(width: geometry.size.width/2)
+                
                 Spacer()
             }
         }
@@ -49,7 +57,7 @@ struct HomeScreen: View, HomeScreenDelegate {
     func renderFilterButton() -> some View {
         Button(
             action: {
-                showingSheet.toggle()
+                viewModel.showingSheet.toggle()
             },
             label: {
                 Image(systemName: "slider.vertical.3")
@@ -59,69 +67,29 @@ struct HomeScreen: View, HomeScreenDelegate {
         )
     }
     
-    func renderLogoImage(geometry: GeometryProxy) -> some View {
+    func renderLogoImage() -> some View {
         Image("github-icon")
             .resizable()
             .scaledToFit()
-            .frame(width: geometry.size.width/4, height: geometry.size.height/4)
             .padding()
     }
     
-    func renderSearchBar(geometry: GeometryProxy) -> some View {
-        SearchBar(text: $text, geometry: geometry)
-            .padding(.horizontal, geometry.size.width/7)
+    func renderSearchBar() -> some View {
+        SearchBar(text: $viewModel.text)
+            .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.bottom)
     }
     
-    func renderSearchButton(geometry: GeometryProxy) -> some View {
+    func renderSearchButton() -> some View {
         NavigationLink(
             destination: {
-                CollectionScreen(
-                    viewModel: CollectionScreenViewModel(
-                        usersSelected: viewModel.usersSelected,
-                        repositoriesSelected: viewModel.repositoriesSelected,
-                        githubRepository: GithubRepositoryImpl(),
-                        userRepository: UsersRepositoryImpl(),
-                        searchQuery: text
-                    )
-                )
-            },
-            label: {
-                RoundedRectangle(cornerRadius: 5)
-                    .frame(width: geometry.size.width/3.5, height: geometry.size.height/20)
-                    .foregroundColor(.black)
-                    .overlay(content: {
-                        Text("SEARCH")
-                            .foregroundColor(Color.white)
-                            .font(.system(size: geometry.size.height/40))
-                            .padding(.horizontal)
-                    })
+                viewModel.searchResultViewBuilder(text: viewModel.text)
             }
-        )
+        ) {
+            Text("Search")
+                .frame(minWidth: 0, maxWidth: .infinity)
+        }
+        .buttonStyle(SearchButtonStyle())
+        .disabled(viewModel.queryIsEmpty(text: viewModel.text))
     }
-    
-    //MARK: - DELEGATE IMPL
-    func toggleUsers() {
-        viewModel.didToggleUsers()
-    }
-    
-    func toggleRepositories() {
-        viewModel.didToggleRepositories()
-    }
-    
-    func getUsers() -> Bool {
-        return viewModel.usersSelected
-    }
-    
-    func getRepositories() -> Bool {
-        return viewModel.repositoriesSelected
-    }
-}
-
-//MARK: - DELEGATE
-protocol HomeScreenDelegate {
-    func toggleUsers()
-    func toggleRepositories()
-    func getUsers() -> Bool
-    func getRepositories() -> Bool
 }
