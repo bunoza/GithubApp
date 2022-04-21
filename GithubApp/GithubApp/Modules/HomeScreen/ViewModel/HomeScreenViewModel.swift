@@ -10,27 +10,25 @@ import SwiftUI
 
 class HomeScreenViewModel: ObservableObject, HomeScreenViewModelDelegate {
     
-    
-    @Published var repositoriesSelected = true
-    @Published var usersSelected = false
     @Published var text: String = ""
     @Published var showingSheet = false
-
+    @Published var savedSettings: GithubAppSaveModel
     
-    func didToggleRepositories() {
-        repositoriesSelected.toggle()
-    }
+    let persistence: UserDefaultsManager = UserDefaultsManager()
     
-    func didToggleUsers() {
-        usersSelected.toggle()
+    init() {
+        savedSettings = GithubAppSaveModel(
+            isUsersChecked: false,
+            isRepositoriesChecked: true
+        )
     }
     
     @ViewBuilder
     func searchResultViewBuilder(text: String) -> some View {
         SearchResultsView(
             viewModel: SearchResultsViewModel(
-                usersSelected: usersSelected,
-                repositoriesSelected: repositoriesSelected,
+                usersSelected: savedSettings.isUsersChecked,
+                repositoriesSelected: savedSettings.isRepositoriesChecked,
                 githubRepository: GithubRepositoryImpl(),
                 userRepository: UsersRepositoryImpl(),
                 searchQuery: text
@@ -38,25 +36,34 @@ class HomeScreenViewModel: ObservableObject, HomeScreenViewModelDelegate {
         )
     }
     
-//MARK: Delegate Implementation
+    func onAppear() {
+        do {
+            try savedSettings = persistence.getGithubSettings().get()
+        }
+        catch {}
+    }
+    
+    //MARK: Delegate Implementation
     func queryIsEmpty(text: String) -> Bool {
         return text.isEmpty
     }
     
     func getRepositories() -> Bool {
-        return repositoriesSelected
+        return savedSettings.isRepositoriesChecked
     }
     
     func getUsers() -> Bool {
-        return usersSelected
+        return savedSettings.isUsersChecked
     }
     
     func toggleRepositories() {
-        repositoriesSelected.toggle()
+        savedSettings.isRepositoriesChecked.toggle()
+        persistence.saveGithubSettings(saveModel: savedSettings)
     }
     
     func toggleUsers() {
-        usersSelected.toggle()
+        savedSettings.isUsersChecked.toggle()
+        persistence.saveGithubSettings(saveModel: savedSettings)
     }
 }
 

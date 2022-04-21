@@ -11,16 +11,16 @@ import SwiftUI
 class SheetViewModel {
     
     let delegate: HomeScreenViewModelDelegate
-    let persistence: UserDefaultsManager = UserDefaultsManager()
-    
-    @Published var savedSettings: GithubAppSaveModel
     
     init(delegate: HomeScreenViewModelDelegate) {
         self.delegate = delegate
-        self.savedSettings = GithubAppSaveModel(isUsersChecked: false, isRepositoriesChecked: false)
     }
     
-    func onAppear() {
-        savedSettings = persistence.getGithubSettings()
+    func toggleUsers() {
+        delegate.toggleUsers()
+    }
+    
+    func toggleRepositories() {
+        delegate.toggleRepositories()
     }
 }

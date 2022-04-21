@@ -11,22 +11,32 @@ import Combine
 class UserDefaultsManager {
     let defaults = UserDefaults.standard
     let encoder = JSONEncoder()
-
-    func saveGithubSettings(isUsersChecked: Bool, isRepositoriesChecked: Bool) {
-        let githubSaveModel = GithubAppSaveModel(
-            isUsersChecked: isUsersChecked,
-            isRepositoriesChecked: isRepositoriesChecked
-        )
+    let decoder = JSONDecoder()
+    
+    func saveGithubSettings(saveModel: GithubAppSaveModel) {
         do {
-            let data = try encoder.encode(githubSaveModel)
+            let data = try encoder.encode(saveModel)
             defaults.set(data, forKey: "saveModel")
         }
         catch{}
     }
     
-    func getGithubSettings() -> GithubAppSaveModel {
-        let saveModel = defaults.githubAppSaveModel
-        return saveModel
+    func getGithubSettings() -> Result<GithubAppSaveModel, GithubAppError> {
+        var defaultSettings = GithubAppSaveModel(
+            isUsersChecked: false,
+            isRepositoriesChecked: true
+        )
+        do {
+            guard let decoded = defaults.data(forKey: "saveModel")
+            else {
+                return .failure(.persistenceError)
+            }
+            defaultSettings = try decoder.decode(GithubAppSaveModel.self, from: decoded)
+        }
+        catch {
+            return .failure(.error)
+        }
+        return .success(defaultSettings)
     }
     
 }
