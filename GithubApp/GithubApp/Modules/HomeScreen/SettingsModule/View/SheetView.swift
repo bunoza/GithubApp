@@ -79,9 +79,9 @@ struct SheetView: View {
             isChecked: viewModel.delegate.getRepositories(),
             title: "Repositories"
         ) {
-            viewModel.delegate.toggleRepositories()
+            viewModel.toggleRepositories()
             if viewModel.delegate.getUsers() == false && viewModel.delegate.getRepositories() == false {
-                viewModel.delegate.toggleRepositories()
+                viewModel.toggleRepositories()
             }
         }
         .padding()
@@ -92,9 +92,9 @@ struct SheetView: View {
             isChecked: viewModel.delegate.getUsers(),
             title: "Users"
         ) {
-            viewModel.delegate.toggleUsers()
+            viewModel.toggleUsers()
             if viewModel.delegate.getUsers() == false && viewModel.delegate.getRepositories() == false {
-                viewModel.delegate.toggleRepositories()
+                viewModel.toggleRepositories()
             }
         }
         .padding()
