@@ -48,6 +48,7 @@ struct RepositoryCellView: View {
                 )
                 .hidden()
             )
+            Divider()
             HStack {
                 Button(
                     action: {
@@ -74,13 +75,14 @@ struct RepositoryCellView: View {
                 )
                 .buttonStyle(PlainButtonStyle())
                 .padding()
-                
+                                
                 Button {
                     UIApplication.shared.open(url)
                 } label: {
                     Text("Open in Browser")
                 }
                 .buttonStyle(PlainButtonStyle())
+                .padding()
             }
         }
     }
