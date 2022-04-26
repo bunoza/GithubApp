@@ -17,7 +17,6 @@ struct SettingsView: View {
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
-        setupBindings()
     }
     
     func setupBindings() {
