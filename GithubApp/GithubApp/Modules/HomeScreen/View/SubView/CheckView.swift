@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CheckView: View {
     
-    @State var isChecked: Bool
+    @Binding var isChecked: Bool
     
     var title: String
     var action: () -> ()
@@ -23,7 +23,7 @@ struct CheckView: View {
         HStack {
             Button(action: toggle)
             {
-                Image(systemName: isChecked ? "checkmark.square": "square")
+                Image(systemName: isChecked ? "checkmark.square" : "square")
             }
             Text(title)
                 .foregroundColor(.black)
