@@ -18,7 +18,6 @@ struct HomeScreen: View {
     var body: some View {
         NavigationView {
             renderContentView()
-                .navigationBarHidden(false)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -26,9 +25,7 @@ struct HomeScreen: View {
                     }
                 })
                 .sheet(isPresented: $viewModel.showingSheet) {
-                    NavigationView {
-                        SheetView(viewModel: SheetViewModel(delegate: viewModel))
-                    }
+                    SettingsView(viewModel: SettingsViewModel())
                 }
         }
     }

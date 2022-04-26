@@ -7,24 +7,41 @@
 
 import SwiftUI
 
-struct SheetView: View {
+struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     
-    let viewModel: SheetViewModel
+    @ObservedObject var viewModel: SettingsViewModel
     
-    init(viewModel: SheetViewModel) {
+    @State var users: Bool = false
+    @State var repos: Bool = true
+    
+    init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
+        setupBindings()
+    }
+    
+    func setupBindings() {
+        self.users = viewModel.savedSettings.isUsersChecked
+        self.repos = viewModel.savedSettings.isRepositoriesChecked
     }
     
     var body: some View {
-        renderContentView()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Settings")
-            .toolbar(content: {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    renderDoneButton()
-                }
-            })
+        NavigationView {
+            renderContentView()
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Settings")
+                .toolbar(
+                    content: {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            renderDoneButton()
+                        }
+                    })
+                .onAppear(
+                    perform: {
+                        setupBindings()
+                    })
+        }
+        
     }
     
     func renderContentView() -> some View {
@@ -49,6 +66,7 @@ struct SheetView: View {
     func renderDoneButton() -> some View {
         Button(
             action: {
+                viewModel.saveSettings()
                 dismiss()
             },
             label: {
@@ -59,6 +77,7 @@ struct SheetView: View {
     
     func renderApplyButton() -> some View {
         Button("Apply") {
+            viewModel.saveSettings()
             dismiss()
         }
         .buttonStyle(SearchButtonStyle())
@@ -76,11 +95,11 @@ struct SheetView: View {
     
     func renderRepoCheckView() -> some View {
         CheckView(
-            isChecked: viewModel.delegate.getRepositories(),
+            isChecked: $repos,
             title: "Repositories"
         ) {
             viewModel.toggleRepositories()
-            if viewModel.delegate.getUsers() == false && viewModel.delegate.getRepositories() == false {
+            if viewModel.savedSettings.isUsersChecked == false && viewModel.savedSettings.isRepositoriesChecked == false {
                 viewModel.toggleRepositories()
             }
         }
@@ -89,15 +108,14 @@ struct SheetView: View {
     
     func renderUsersCheckView() -> some View {
         CheckView(
-            isChecked: viewModel.delegate.getUsers(),
+            isChecked: $users,
             title: "Users"
         ) {
             viewModel.toggleUsers()
-            if viewModel.delegate.getUsers() == false && viewModel.delegate.getRepositories() == false {
+            if viewModel.savedSettings.isUsersChecked == false && viewModel.savedSettings.isRepositoriesChecked == false {
                 viewModel.toggleRepositories()
             }
         }
         .padding()
     }
-    
 }
