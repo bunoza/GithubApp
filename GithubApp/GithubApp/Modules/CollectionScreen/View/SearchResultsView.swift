@@ -12,6 +12,8 @@ struct SearchResultsView: View {
     @ObservedObject var viewModel: SearchResultsViewModel
     @Environment(\.dismiss) var dismiss
     
+    @State private var selectedTab: Tabs = .Repositories
+    
     init(viewModel: SearchResultsViewModel) {
         self.viewModel = viewModel
     }
@@ -39,6 +41,44 @@ struct SearchResultsView: View {
     }
     
     func renderContentView() -> some View {
-        viewModel.initUI()
+        ZStack {
+            let tabs = viewModel.initUI()
+            if tabs.contains(.Users) && tabs.contains(.Repositories) {
+                renderUsersRepositoriesUI()
+            } else if tabs.contains(.Users) {
+                renderUsersUI()
+            } else if tabs.contains(.Repositories) {
+                renderRepositoriesUI()
+            }
+        }
+    }
+    
+    func renderUsersRepositoriesUI() -> some View {
+        VStack {
+            VStack {
+                Picker("Tabs", selection: $selectedTab) {
+                    ForEach(Tabs.allCases) { tab in
+                        Text(String(describing: tab))
+                    }
+                }
+            }
+            .pickerStyle(.segmented)
+            if selectedTab == .Users {
+                renderUsersUI()
+            }
+            if selectedTab == .Repositories {
+                renderRepositoriesUI()
+            }
+        }
+    }
+    
+    func renderUsersUI() -> some View {
+        UserListView(viewModel: viewModel)
+            .onAppear(perform: { viewModel.onUsersAppear() })
+    }
+    
+    func renderRepositoriesUI() -> some View {
+        RepositoryListView(viewModel: viewModel)
+            .onAppear(perform: { viewModel.onRepositoriesAppear() })
     }
 }

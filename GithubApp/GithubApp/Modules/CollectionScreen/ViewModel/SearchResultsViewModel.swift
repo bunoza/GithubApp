@@ -9,6 +9,13 @@ import Foundation
 import SwiftUI
 import Combine
 
+enum Tabs: CaseIterable, Identifiable {
+    var id: Self { self }
+    
+    case Repositories
+    case Users
+}
+
 class SearchResultsViewModel: ObservableObject {
     
     @Published var repositories: [ReceivedRepository] = []
@@ -35,48 +42,21 @@ class SearchResultsViewModel: ObservableObject {
         setupUsersListener()
     }
     
-    @ViewBuilder
-    func initUI() -> some View {
+    func initUI() -> [Tabs] {
         let saveModel = persistence.getGithubSettings()
         switch saveModel {
         case .success(let currentSaveModel):
-            if currentSaveModel.isUsersChecked && currentSaveModel.isRepositoriesChecked {
-                renderUsersRepositoriesUI()
-            } else if currentSaveModel.isUsersChecked {
-                renderUsersUI()
-            } else {
-                renderRepositoriesUI()
+            var resultsBool: [Tabs] = []
+            if currentSaveModel.isRepositoriesChecked {
+                resultsBool.append(.Repositories)
             }
+            if currentSaveModel.isUsersChecked {
+                resultsBool.append(.Users)
+            }
+            return resultsBool
         case .failure(let error):
-            ErrorView(error: error)
-        }
-    }
-    
-    @ViewBuilder
-    func renderUsersUI() -> some View {
-        UserListView(viewModel: self)
-            .onAppear(perform: { self.onUsersAppear() })
-    }
-    
-    @ViewBuilder
-    func renderRepositoriesUI() -> some View {
-        RepositoryListView(viewModel: self)
-            .onAppear(perform: { self.onRepositoriesAppear() })
-    }
-    
-    @ViewBuilder
-    func renderUsersRepositoriesUI() -> some View {
-        TabView {
-            renderRepositoriesUI()
-                .tabItem {
-                    Image(systemName: "list.bullet.rectangle")
-                    Text("Repositories")
-                }
-            renderUsersUI()
-                .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("Users")
-                }
+            self.error = error
+            return []
         }
     }
     
