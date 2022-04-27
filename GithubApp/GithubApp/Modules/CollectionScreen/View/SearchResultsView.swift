@@ -39,27 +39,6 @@ struct SearchResultsView: View {
     }
     
     func renderContentView() -> some View {
-        ZStack {
-            if viewModel.repositoriesSelected && viewModel.usersSelected {
-                TabView {
-                    RepositoryListView(viewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "list.bullet.rectangle")
-                            Text("Repositories")
-                        }
-                    UserListView(viewModel: viewModel)
-                        .tabItem {
-                            Image(systemName: "person.circle")
-                            Text("Users")
-                        }
-                }
-                
-            } else if viewModel.usersSelected {
-                UserListView(viewModel: viewModel)
-            } else {
-                RepositoryListView(viewModel: viewModel)
-            }
-        }
+        viewModel.initUI()
     }
-    
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 
 class SearchResultsViewModel: ObservableObject {
@@ -16,19 +17,13 @@ class SearchResultsViewModel: ObservableObject {
     @Published var areUsersLoading: Bool = false
     @Published var areRepositoriesLoading: Bool = false
     
-    
-    let usersSelected: Bool
-    let repositoriesSelected: Bool
+    let persistence: UserDefaultsManager = UserDefaultsManager()
     let searchQuery: String
-    let githubRepository: GithubRepository
-    let userRepository: UsersRepository
+    let githubRepository: GithubRepository = GithubRepositoryImpl()
+    let userRepository: UsersRepository = UsersRepositoryImpl()
     var disposebag = Set<AnyCancellable>()
     
-    init(usersSelected: Bool, repositoriesSelected: Bool, githubRepository: GithubRepository, userRepository: UsersRepository, searchQuery: String) {
-        self.usersSelected = usersSelected
-        self.repositoriesSelected = repositoriesSelected
-        self.githubRepository = githubRepository
-        self.userRepository = userRepository
+    init(searchQuery: String) {
         self.searchQuery = searchQuery
     }
     
@@ -38,6 +33,51 @@ class SearchResultsViewModel: ObservableObject {
     
     func onUsersAppear() {
         setupUsersListener()
+    }
+    
+    @ViewBuilder
+    func initUI() -> some View {
+        let saveModel = persistence.getGithubSettings()
+        switch saveModel {
+        case .success(let currentSaveModel):
+            if currentSaveModel.isUsersChecked && currentSaveModel.isRepositoriesChecked {
+                renderUsersRepositoriesUI()
+            } else if currentSaveModel.isUsersChecked {
+                renderUsersUI()
+            } else {
+                renderRepositoriesUI()
+            }
+        case .failure(let error):
+            ErrorView(error: error)
+        }
+    }
+    
+    @ViewBuilder
+    func renderUsersUI() -> some View {
+        UserListView(viewModel: self)
+            .onAppear(perform: { self.onUsersAppear() })
+    }
+    
+    @ViewBuilder
+    func renderRepositoriesUI() -> some View {
+        RepositoryListView(viewModel: self)
+            .onAppear(perform: { self.onRepositoriesAppear() })
+    }
+    
+    @ViewBuilder
+    func renderUsersRepositoriesUI() -> some View {
+        TabView {
+            renderRepositoriesUI()
+                .tabItem {
+                    Image(systemName: "list.bullet.rectangle")
+                    Text("Repositories")
+                }
+            renderUsersUI()
+                .tabItem {
+                    Image(systemName: "person.circle")
+                    Text("Users")
+                }
+        }
     }
     
     func setupRepositoriesListener() {

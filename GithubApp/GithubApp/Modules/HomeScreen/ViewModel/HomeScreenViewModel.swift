@@ -17,22 +17,11 @@ class HomeScreenViewModel: ObservableObject {
     
     @ViewBuilder
     func searchResultViewBuilder(text: String) -> some View {
-        let saveModel = persistence.getGithubSettings()
-        switch saveModel {
-        case .success(let currentSaveModel):
-            SearchResultsView(
-                viewModel: SearchResultsViewModel(
-                    usersSelected: currentSaveModel.isUsersChecked,
-                    repositoriesSelected: currentSaveModel.isRepositoriesChecked,
-                    githubRepository: GithubRepositoryImpl(),
-                    userRepository: UsersRepositoryImpl(),
-                    searchQuery: text
-                )
+        SearchResultsView(
+            viewModel: SearchResultsViewModel(
+                searchQuery: text
             )
-        case .failure(let error):
-            ErrorView(error: error)
-        }
-        
+        )
     }
     
     func queryIsEmpty(text: String) -> Bool {
