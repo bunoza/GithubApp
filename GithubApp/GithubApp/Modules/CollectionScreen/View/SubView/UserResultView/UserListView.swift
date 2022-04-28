@@ -14,14 +14,11 @@ struct UserListView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.areUsersLoading {
-                LoaderView()
-            } else {
-                GeometryReader { geometry in
-                    renderListView(geometry: geometry)
-                }
+            GeometryReader { geometry in
+                renderListView(geometry: geometry)
             }
-        }.onAppear() { viewModel.onUsersAppear() }
+        }
+        .onAppear() { viewModel.onUsersAppear() }
     }
     
     func renderListView(geometry: GeometryProxy) -> some View {

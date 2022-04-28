@@ -14,12 +14,8 @@ struct RepositoryListView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.areRepositoriesLoading {
-                LoaderView()
-            } else {
-                GeometryReader { geometry in
-                    renderListView(geometry: geometry)
-                }
+            GeometryReader { geometry in
+                renderListView(geometry: geometry)
             }
         }
         .onAppear() { viewModel.onRepositoriesAppear() }

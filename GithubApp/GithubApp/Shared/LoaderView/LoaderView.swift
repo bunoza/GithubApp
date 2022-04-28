@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoaderView: View {
     var body: some View {
-        ZStack {
+        VStack {
             ProgressView().progressViewStyle(.circular)
         }
     }
