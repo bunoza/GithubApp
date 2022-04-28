@@ -35,11 +35,15 @@ class SearchResultsViewModel: ObservableObject {
     }
     
     func onRepositoriesAppear() {
-        setupRepositoriesListener()
+        if repositories.isEmpty {
+            setupRepositoriesListener()
+        }
     }
     
     func onUsersAppear() {
-        setupUsersListener()
+        if users.isEmpty {
+            setupUsersListener()
+        }
     }
     
     func initUI() -> [Tabs] {

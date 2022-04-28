@@ -37,6 +37,11 @@ struct SearchResultsView: View {
                         }
                     }
                 )
+                .onAppear(perform: {
+                    viewModel.onUsersAppear()
+                    viewModel.onRepositoriesAppear()
+                })
+
         }
     }
     
@@ -74,11 +79,9 @@ struct SearchResultsView: View {
     
     func renderUsersUI() -> some View {
         UserListView(viewModel: viewModel)
-            .onAppear(perform: { viewModel.onUsersAppear() })
     }
     
     func renderRepositoriesUI() -> some View {
         RepositoryListView(viewModel: viewModel)
-            .onAppear(perform: { viewModel.onRepositoriesAppear() })
     }
 }
