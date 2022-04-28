@@ -41,7 +41,6 @@ struct SearchResultsView: View {
                     viewModel.onUsersAppear()
                     viewModel.onRepositoriesAppear()
                 })
-
         }
     }
     
@@ -60,14 +59,9 @@ struct SearchResultsView: View {
     
     func renderUsersRepositoriesUI() -> some View {
         VStack {
-            VStack {
-                Picker("Tabs", selection: $selectedTab) {
-                    ForEach(Tabs.allCases) { tab in
-                        Text(String(describing: tab))
-                    }
-                }
+            if !viewModel.areRepositoriesLoading && !viewModel.areUsersLoading {
+                renderPicker()
             }
-            .pickerStyle(.segmented)
             if selectedTab == .Users {
                 renderUsersUI()
             }
@@ -77,11 +71,37 @@ struct SearchResultsView: View {
         }
     }
     
+    func renderPicker() -> some View {
+        VStack {
+            VStack {
+                Picker("Tabs", selection: $selectedTab) {
+                    ForEach(Tabs.allCases) { tab in
+                        Text(String(describing: tab))
+                    }
+                }
+                .padding()
+            }
+            .pickerStyle(.segmented)
+        }
+    }
+    
     func renderUsersUI() -> some View {
-        UserListView(viewModel: viewModel)
+        ZStack {
+            if viewModel.areUsersLoading {
+                LoaderView()
+            } else {
+                UserListView(viewModel: viewModel)
+            }
+        }
     }
     
     func renderRepositoriesUI() -> some View {
-        RepositoryListView(viewModel: viewModel)
+        ZStack {
+            if viewModel.areRepositoriesLoading {
+                LoaderView()
+            } else {
+                RepositoryListView(viewModel: viewModel)
+            }
+        }
     }
 }
