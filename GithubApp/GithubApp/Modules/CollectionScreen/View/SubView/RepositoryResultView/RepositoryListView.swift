@@ -12,6 +12,10 @@ struct RepositoryListView: View {
     
     @ObservedObject var viewModel: SearchResultsViewModel
     
+    @Binding var selectedTab: Tabs
+    
+    let showPicker: Bool
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -23,6 +27,13 @@ struct RepositoryListView: View {
     
     func renderListView(geometry: GeometryProxy) -> some View {
         List {
+            if showPicker {
+                Section(
+                    content: {
+                        renderPicker()
+                    }
+                )
+            }
             ForEach(viewModel.repositories , id: \.self) { item in
                 Section(
                     content: {
@@ -40,6 +51,19 @@ struct RepositoryListView: View {
             }
         }
         .listStyle(InsetGroupedListStyle())
+    }
+    
+    func renderPicker() -> some View {
+        VStack {
+            VStack {
+                Picker("Tabs", selection: $selectedTab) {
+                    ForEach(Tabs.allCases) { tab in
+                        Text(String(describing: tab))
+                    }
+                }
+            }
+            .pickerStyle(.segmented)
+        }
     }
     
 }
