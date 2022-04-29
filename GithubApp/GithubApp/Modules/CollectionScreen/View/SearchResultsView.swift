@@ -25,6 +25,23 @@ struct SearchResultsView: View {
             renderContentView()
                 .navigationTitle("Results for \"\(viewModel.searchQuery)\"")
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden(true)
+                .toolbar(
+                    content: {
+                        ToolbarItem(placement: .navigationBarLeading)
+                        {
+                            Button(
+                                action: {
+                                    dismiss()
+                                }
+                            )
+                            {
+                                Image(systemName: "chevron.backward")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                    }
+                )
                 .toolbar(
                     content: {
                         ToolbarItem(placement: .navigationBarTrailing)
@@ -59,9 +76,6 @@ struct SearchResultsView: View {
     
     func renderUsersRepositoriesUI() -> some View {
         VStack {
-//            if !viewModel.areRepositoriesLoading && !viewModel.areUsersLoading {
-//                renderPicker()
-//            }
             if selectedTab == .Users {
                 renderUsersUI()
             }

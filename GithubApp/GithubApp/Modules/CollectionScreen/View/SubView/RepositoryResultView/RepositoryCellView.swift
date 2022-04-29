@@ -39,8 +39,7 @@ struct RepositoryCellView: View {
                 NavigationLink(
                     isActive: $isRepositoryPresented,
                     destination: {
-                        WebView(request: URLRequest(url: url))
-                            .navigationTitle(repository.name)
+                        WebViewHolder(url: url, title: repository.name)
                     },
                     label: {
                         EmptyView()
@@ -63,8 +62,7 @@ struct RepositoryCellView: View {
                         isActive: $isAuthorPresented,
                         destination: {
                             if let validURL = URL(string: repository.owner.htmlURL) {
-                                WebView(request: URLRequest(url: validURL))
-                                    .navigationTitle(repository.owner.login)
+                                WebViewHolder(url: validURL, title: repository.owner.login)
                             }
                         },
                         label: {
@@ -75,7 +73,7 @@ struct RepositoryCellView: View {
                 )
                 .buttonStyle(PlainButtonStyle())
                 .padding()
-                                
+                
                 Button {
                     UIApplication.shared.open(url)
                 } label: {

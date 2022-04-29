@@ -37,8 +37,7 @@ struct UserCellView: View {
                 NavigationLink(
                     isActive: $isDetailsPresentedFromCard,
                     destination: {
-                        WebView(request: URLRequest(url: url))
-                            .navigationTitle(user.login)
+                        WebViewHolder(url: url, title: user.login)
                     },
                     label: {
                         EmptyView()
@@ -97,8 +96,7 @@ struct UserCellView: View {
                 NavigationLink(
                     isActive: $isDetailsPresentedFromButton,
                     destination: {
-                        WebView(request: URLRequest(url: url))
-                            .navigationTitle(user.login)
+                        WebViewHolder(url: url, title: user.login)
                     },
                     label: {
                         EmptyView()
