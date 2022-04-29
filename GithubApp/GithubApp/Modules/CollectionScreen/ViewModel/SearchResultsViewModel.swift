@@ -23,6 +23,7 @@ class SearchResultsViewModel: ObservableObject {
     @Published var error: Error?
     @Published var areUsersLoading: Bool = false
     @Published var areRepositoriesLoading: Bool = false
+    var showPicker: Bool = false
     
     let persistence: UserDefaultsManager = UserDefaultsManager()
     let searchQuery: String
@@ -56,6 +57,11 @@ class SearchResultsViewModel: ObservableObject {
             }
             if currentSaveModel.isUsersChecked {
                 resultsBool.append(.Users)
+            }
+            if resultsBool.contains(.Users) && resultsBool.contains(.Repositories) {
+                showPicker = true
+            } else {
+                showPicker = false
             }
             return resultsBool
         case .failure(let error):
