@@ -14,7 +14,7 @@ struct SearchButtonStyle: ButtonStyle {
             .padding()
             .background(Color.black)
             .foregroundColor(.white)
-            .cornerRadius(5)
+            .cornerRadius(8)
             .frame(minWidth: 0, maxWidth: .infinity)
     }
 }

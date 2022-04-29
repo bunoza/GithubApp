@@ -24,12 +24,11 @@ struct UserCellView: View {
         VStack {
             HStack {
                 renderUserName()
-                    .padding(.vertical, 3)
                     .frame(width: geometry.size.width/2)
+                
                 renderAvatar()
-                    .padding(.vertical, 2)
-                    .frame(width: geometry.size.width/3.5)
             }
+            .frame(height: geometry.size.height/6)
             .onTapGesture {
                 isDetailsPresentedFromCard.toggle()
             }
@@ -46,10 +45,10 @@ struct UserCellView: View {
                 .hidden()
             )
             HStack {
-                Spacer()
                 renderOpenProfileButton()
                 renderOpenRepositoriesButton()
             }
+            .padding(.bottom)
         }
     }
     
@@ -57,7 +56,7 @@ struct UserCellView: View {
     func renderUserName() -> some View {
         HStack {
             Text(user.login)
-                .font(.title)
+                .font(.title2)
                 .foregroundColor(.gray)
                 .lineLimit(1)
             Spacer()
@@ -66,13 +65,12 @@ struct UserCellView: View {
     
     func renderAvatar() -> some View {
         HStack {
-            Spacer()
             AsyncImage(
                 url: URL(string: user.avatarURL),
                 content: { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width/6, height: geometry.size.height/6)
+                        .frame(width: geometry.size.width/4, height: geometry.size.height/4)
                 },
                 placeholder: {
                     ProgressView()
@@ -104,8 +102,7 @@ struct UserCellView: View {
                 )
                 .hidden()
             )
-            .buttonStyle(PlainButtonStyle())
-            .padding()
+            .buttonStyle(SearchButtonStyle())
         }
     }
     
@@ -117,8 +114,9 @@ struct UserCellView: View {
                 }
             } label: {
                 Text("Open repositories")
+                    .font(.system(size: geometry.size.width/27))
             }
-            .buttonStyle(PlainButtonStyle())
+            .buttonStyle(SearchButtonStyle())
         }
     }
 }

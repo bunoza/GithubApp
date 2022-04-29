@@ -25,9 +25,11 @@ struct RepositoryCellView: View {
     func createContent() -> some View {
         VStack {
             HStack {
-                renderRepositoryInfo()
-                    .padding(.vertical, 3)
-                    .frame(width: geometry.size.width/2)
+                VStack {
+                    renderRepositoryInfo()
+                        .padding(.vertical, 3)
+                        .frame(height: geometry.size.height/5)
+                }
                 renderNumbersInfo()
                     .padding(.vertical, 2)
                     .frame(width: geometry.size.width/3.5)
@@ -47,40 +49,10 @@ struct RepositoryCellView: View {
                 )
                 .hidden()
             )
-            Divider()
             HStack {
-                Button(
-                    action: {
-                        isAuthorPresented.toggle()
-                    },
-                    label: {
-                        Text("Author details")
-                    }
-                )
-                .background(
-                    NavigationLink(
-                        isActive: $isAuthorPresented,
-                        destination: {
-                            if let validURL = URL(string: repository.owner.htmlURL) {
-                                WebViewHolder(url: validURL, title: repository.owner.login)
-                            }
-                        },
-                        label: {
-                            EmptyView()
-                        }
-                    )
-                    .hidden()
-                )
-                .buttonStyle(PlainButtonStyle())
-                .padding()
-                
-                Button {
-                    UIApplication.shared.open(url)
-                } label: {
-                    Text("Open in Browser")
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
+                renderAuthorDetailsButton()
+                renderOpenInBrowserButton()
+                Spacer()
             }
         }
     }
@@ -176,5 +148,42 @@ struct RepositoryCellView: View {
                 .font(.caption2)
         }
         .padding(.vertical, 2)
+    }
+    
+    func renderAuthorDetailsButton() -> some View {
+        Button(
+            action: {
+                isAuthorPresented.toggle()
+            },
+            label: {
+                Text("Author details")
+            }
+        )
+        .background(
+            NavigationLink(
+                isActive: $isAuthorPresented,
+                destination: {
+                    if let validURL = URL(string: repository.owner.htmlURL) {
+                        WebViewHolder(url: validURL, title: repository.owner.login)
+                    }
+                },
+                label: {
+                    EmptyView()
+                }
+            )
+            .hidden()
+        )
+        .buttonStyle(SearchButtonStyle())
+        .padding()
+    }
+    
+    func renderOpenInBrowserButton() -> some View {
+        Button {
+            UIApplication.shared.open(url)
+        } label: {
+            Text("Open in Browser")
+        }
+        .buttonStyle(PlainButtonStyle())
+        .padding()
     }
 }
