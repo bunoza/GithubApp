@@ -56,5 +56,4 @@ struct UserListView: View {
             .pickerStyle(.segmented)
         }
     }
-    
 }

@@ -66,6 +66,7 @@ struct SearchResultsView: View {
             let tabs = viewModel.initUI()
             if tabs.contains(.Users) && tabs.contains(.Repositories) {
                 renderUsersRepositoriesUI()
+                    .animation( Animation.easeInOut(duration: 0.35), value: selectedTab)
             } else if tabs.contains(.Users) {
                 renderUsersUI()
             } else if tabs.contains(.Repositories) {
@@ -78,14 +79,14 @@ struct SearchResultsView: View {
         VStack {
             if selectedTab == .Users {
                 renderUsersUI()
+                    .transition(.swapRight)
             }
             if selectedTab == .Repositories {
                 renderRepositoriesUI()
+                    .transition(.swapLeft)
             }
         }
     }
-    
-    
     
     func renderUsersUI() -> some View {
         ZStack {
@@ -107,3 +108,4 @@ struct SearchResultsView: View {
         }
     }
 }
+
