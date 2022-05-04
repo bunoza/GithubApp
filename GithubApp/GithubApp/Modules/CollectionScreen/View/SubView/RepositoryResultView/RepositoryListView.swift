@@ -27,13 +27,13 @@ struct RepositoryListView: View {
     
     func renderListView(geometry: GeometryProxy) -> some View {
         List {
-            if showPicker {
-                Section(
-                    content: {
-                        renderPicker()
-                    }
-                )
-            }
+//            if showPicker {
+//                Section(
+//                    content: {
+//                        renderPicker()
+//                    }
+//                )
+//            }
             ForEach(viewModel.repositories , id: \.self) { item in
                 Section(
                     content: {

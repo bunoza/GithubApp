@@ -136,4 +136,16 @@ class SearchResultsViewModel: ObservableObject {
             .store(in: &disposebag)
     }
     
+    func isRightSwipeRecognized(gesture: DragGesture.Value) -> Bool {
+        return gesture.translation.width > 100 &&
+        gesture.translation.height > -30 &&
+        gesture.translation.height < 30
+    }
+    
+    func isLeftSwipeRecognized(gesture: DragGesture.Value) -> Bool {
+        return gesture.translation.width < -100 &&
+        gesture.translation.height > -30 &&
+        gesture.translation.height < 30
+    }
+    
 }

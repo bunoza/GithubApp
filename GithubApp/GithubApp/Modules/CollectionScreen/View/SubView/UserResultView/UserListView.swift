@@ -27,13 +27,13 @@ struct UserListView: View {
     
     func renderListView(geometry: GeometryProxy) -> some View {
         List {
-            if showPicker {
-                Section(
-                    content: {
-                        renderPicker()
-                    }
-                )
-            }
+//            if showPicker {
+//                Section(
+//                    content: {
+//                        renderPicker()
+//                    }
+//                )
+//            }
             ForEach(viewModel.users , id: \.self) { item in
                 Section(
                     content: {
@@ -44,16 +44,16 @@ struct UserListView: View {
         }
     }
     
-    func renderPicker() -> some View {
-        VStack {
-            VStack {
-                Picker("Tabs", selection: $selectedTab) {
-                    ForEach(Tabs.allCases) { tab in
-                        Text(String(describing: tab))
-                    }
-                }
-            }
-            .pickerStyle(.segmented)
-        }
-    }
+//    func renderPicker() -> some View {
+//        VStack {
+//            VStack {
+//                Picker("Tabs", selection: $selectedTab) {
+//                    ForEach(Tabs.allCases) { tab in
+//                        Text(String(describing: tab))
+//                    }
+//                }
+//            }
+//            .pickerStyle(.segmented)
+//        }
+//    }
 }

@@ -10,4 +10,5 @@ import Foundation
 enum GithubAppError: Error {
     case persistenceError
     case error
+    case tabNotPickedError
 }
