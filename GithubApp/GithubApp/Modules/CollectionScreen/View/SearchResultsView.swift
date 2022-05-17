@@ -70,9 +70,9 @@ struct SearchResultsView: View {
             if tabs.contains(.Users) && tabs.contains(.Repositories) {
                 renderUsersRepositoriesUI()
             } else if tabs.contains(.Users) {
-                renderUsersUI()
+                renderUsersUI(with: false)
             } else if tabs.contains(.Repositories) {
-                renderRepositoriesUI()
+                renderRepositoriesUI(with: false)
             } else {
                 ErrorView(error: GithubAppError.tabNotPickedError)
             }
@@ -82,20 +82,22 @@ struct SearchResultsView: View {
     func renderUsersRepositoriesUI() -> some View {
         VStack {
             if selectedTab == .Users {
-                renderUsersUI()
+                renderUsersUI(with: true)
             }
             if selectedTab == .Repositories {
-                renderRepositoriesUI()
+                renderRepositoriesUI(with: true)
             }
         }
     }
     
-    func renderUsersUI() -> some View {
+    func renderUsersUI(with showPicker: Bool) -> some View {
         VStack {
             if viewModel.areUsersLoading {
                 LoaderView()
             } else {
-                renderPicker()
+                if showPicker {
+                    renderPicker()
+                }
                 UserListView(
                     viewModel: viewModel,
                     selectedTab: $selectedTab,
@@ -122,12 +124,14 @@ struct SearchResultsView: View {
         }
     }
     
-    func renderRepositoriesUI() -> some View {
+    func renderRepositoriesUI(with showPicker: Bool) -> some View {
         VStack {
             if viewModel.areRepositoriesLoading {
                 LoaderView()
             } else {
-                renderPicker()
+                if showPicker {
+                    renderPicker()
+                }
                 RepositoryListView(
                     viewModel: viewModel,
                     selectedTab: $selectedTab,
